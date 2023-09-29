@@ -1,0 +1,46 @@
+
+
+    <%- include('./header'); %>
+
+    <h1>Nodes</h1>
+    <% for (let node of nodes) { %>
+        <%= node.id %>
+        <b><%= node.hostname %></b>
+        <%= node.ipAddress.value %>
+        <%= node.isActive %>
+        <%= node.dataCenterId %>
+        <br />
+    <% } %>
+    
+    <h2>Create</h2>
+    <form action="/nodes/create" method="POST">
+        Hostname: <input type="text" name="hostname"/><br />
+        IP: <input type="text" name="ipAddress"/><br />
+        Active: <input type="checkbox" name="isActive"/><br />
+        Data center ID: <input type="number" name="dataCenterId"/><br />
+        
+        <input type="submit" value="Create node">
+    </form>
+    
+
+    <h2>Update</h2>
+    <form action="/nodes/update" method="POST">
+        ID: <input type="number" name="id"/><br />
+        Hostname: <input type="text" name="hostname"/><br />
+        IP: <input type="text" name="ipAddress"/><br />
+        Active: <input type="checkbox" name="isActive"/><br />
+        Data center ID: <input type="number" name="dataCenterId"/><br />
+        
+        <input type="submit" value="Update node">
+    </form>
+
+
+    <h2>Delete</h2>
+    <form action="/nodes/delete" method="POST">
+        ID: <input type="number" name="id"/>
+        
+        <input type="submit" value="Delete node">
+    </form>
+
+
+    <%- include('./footer'); %>

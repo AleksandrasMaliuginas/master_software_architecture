@@ -1,0 +1,15 @@
+
+    <%- include('./header') %>
+
+    <h1>Node</h1>
+    <% if (node) { %>
+        <%= node.id %>
+        <b><%= node.hostname %></b>
+        <%= node.ipAddress.value %>
+        <%= node.isActive %>
+        <%= node.dataCenterId %>
+        <br />
+    <% } %>
+    
+</body>
+</html>

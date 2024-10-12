@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction, Application } from 'express';
 import { NodesRepository } from '../repositories/nodesRepository';
-import { Node } from '../models/node';
+import { IpAddress, Node } from '../models/node';
 
 
 class NodesController {
@@ -40,7 +40,7 @@ class NodesController {
 
     async update(req: Request, res: Response, next: NextFunction) {
         console.log(req.body)
-        const id: string = req.params.id;
+        const id: number = parseInt(req.params.id);
         const nodeToCUpdate: Node = req.body.node as Node;
         const createdNode: Node | undefined = this.nodesRepository.update(id, nodeToCUpdate);
         
@@ -50,8 +50,8 @@ class NodesController {
     }
 
     async delete(req: Request, res: Response, next: NextFunction) {
-        const id: string = req.params.id;
-        this.nodesRepository.delete(id.toUpperCase());
+        const id: number = parseInt(req.params.id);
+        this.nodesRepository.delete(id);
 
         return res.render('node', {
             node: req.params.id
@@ -59,13 +59,7 @@ class NodesController {
     }
 }
 
-const dummyNode : Node = {
-    id: 98,
-    hostname: "SERVER001",
-    ipAddress: "10.0.0.10",
-    isActive: true,
-    dataCenterId: 10
-}
+const dummyNode : Node = new Node(98, "SERVER001", new IpAddress("10.0.0.10"), true, 10 )
 
 // getting all posts
 const listNodes = async (req: Request, res: Response, next: NextFunction) => {
